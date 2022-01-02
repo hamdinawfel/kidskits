@@ -1,3 +1,4 @@
+require("dotenv").config();
 const { ApolloServer } = require("apollo-server");
 const { PubSub } = require("graphql-subscriptions");
 
@@ -14,7 +15,7 @@ const server = new ApolloServer({
   resolvers,
   context: ({ req }) => ({ req, pubsub }),
 });
-
+const MONGO_URI = process.env.MONGO_URI;
 mongoose
   .connect(MONGO_URI, {
     useUnifiedTopology: true,
