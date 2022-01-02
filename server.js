@@ -24,7 +24,13 @@ mongoose
   .catch((err) => {
     console.log(`DB Connection Error: ${err.message}`);
   });
-
-server.listen({ port: 8080 }).then((res) => {
-  console.log(`🚀  Server ready at ${res.url}`);
-});
+// Production set up
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("./client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
+// port
+const port = process.env.PORT || 8080;
+server.listen(port, () => console.log(`Server running on port : ${port}`));
