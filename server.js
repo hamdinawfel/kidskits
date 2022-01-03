@@ -7,7 +7,6 @@ const mongoose = require("mongoose");
 const typeDefs = require("./graphql/typeDefs");
 const resolvers = require("./graphql/resolvers/index.js");
 
-const { MONGO_URI } = require("./config.js");
 const pubsub = new PubSub();
 
 const server = new ApolloServer({
